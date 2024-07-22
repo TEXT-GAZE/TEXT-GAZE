@@ -1,0 +1,13 @@
+streamlit
+pytesseract
+numpy
+pandas
+Pillow
+python-docx
+pdfplumber
+docx2pdf
+pythoncom
+win32com.client
+io
+PIL
+difflib

@@ -1,0 +1,16 @@
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+
+[server]
+enableCORS = false
+enableXsrfProtection = true
+
+[ui]
+hideMenu = true
+hideFooter = true
+
+[global]
+hideMenuItems = ["GitHub"]
