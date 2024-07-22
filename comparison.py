@@ -4,8 +4,12 @@ from docx import Document
 from docx2pdf import convert
 from difflib import Differ
 import io
-import pythoncom
-import win32com.client
+import platform  # Add this import
+
+# Conditionally import pythoncom and win32com.client if on Windows
+if platform.system() == "Windows":
+    import pythoncom
+    import win32com.client
 
 # Function to extract text from a PDF file
 def extract_text_from_pdf(file):
@@ -44,6 +48,17 @@ def convert_docx_to_pdf(docx_path):
         # Uninitialize COM
         pythoncom.CoUninitialize()
     return pdf_path
+
+def convert_pdf_to_word(pdf_path, output_path):
+    if platform.system() == "Windows":
+        pythoncom.CoInitialize()
+        word = win32com.client.Dispatch("Word.Application")
+        doc = word.Documents.Open(pdf_path)
+        doc.SaveAs(output_path, FileFormat=16)  # 16 represents the Word format
+        doc.Close()
+        word.Quit()
+    else:
+        raise NotImplementedError("PDF to Word conversion is only implemented for Windows.")
 
 # Function to extract text from a DOCX file
 def extract_text_from_docx(file):
