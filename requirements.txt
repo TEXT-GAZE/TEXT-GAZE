@@ -6,5 +6,3 @@ Pillow
 python-docx
 pdfplumber
 docx2pdf
-PIL
-difflib
