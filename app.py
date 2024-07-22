@@ -8,7 +8,7 @@ def home():
 
 @app.route('/streamlit')
 def streamlit_app():
-    return redirect('http://192.168.29.175:8501')  # Use the correct local IP address
+    return redirect('https://textgaze-app-comparison.streamlit.app/')  # Use the correct local IP address
 
 @app.route('/streamlit1')
 def streamlit1_app():
