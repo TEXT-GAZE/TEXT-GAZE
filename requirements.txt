@@ -6,6 +6,5 @@ Pillow
 python-docx
 pdfplumber
 docx2pdf
-pywin32
 PIL
 difflib
