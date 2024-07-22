@@ -12,7 +12,7 @@ def streamlit_app():
 
 @app.route('/streamlit1')
 def streamlit1_app():
-    return redirect('http://192.168.29.175:8502')  # Use the correct local IP address
+    return redirect('https://textgaze-app-extraction.streamlit.app/')  # Use the correct local IP address
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
