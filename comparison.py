@@ -36,18 +36,8 @@ def extract_text_from_pdf(file):
 
 # Function to convert DOCX to PDF
 def convert_docx_to_pdf(docx_path):
-    # Conditionally import pythoncom and win32com.client if on Windows
-    if platform.system() == "Windows":
-    import pythoncom
-    import win32com.client
     pdf_path = docx_path.replace('.docx', '.pdf')
-    pythoncom.CoInitialize()
-    try:
-        # Convert DOCX to PDF
-        convert(docx_path, pdf_path)
-    finally:
-        # Uninitialize COM
-        pythoncom.CoUninitialize()
+    convert(docx_path, pdf_path)
     return pdf_path
 
 def convert_pdf_to_word(pdf_path, output_path):
