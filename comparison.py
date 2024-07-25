@@ -6,10 +6,7 @@ from difflib import Differ
 import io
 import platform  # Add this import
 
-# Conditionally import pythoncom and win32com.client if on Windows
-if platform.system() == "Windows":
-    import pythoncom
-    import win32com.client
+
 
 # Function to extract text from a PDF file
 def extract_text_from_pdf(file):
@@ -39,6 +36,10 @@ def extract_text_from_pdf(file):
 
 # Function to convert DOCX to PDF
 def convert_docx_to_pdf(docx_path):
+    # Conditionally import pythoncom and win32com.client if on Windows
+    if platform.system() == "Windows":
+    import pythoncom
+    import win32com.client
     pdf_path = docx_path.replace('.docx', '.pdf')
     pythoncom.CoInitialize()
     try:
