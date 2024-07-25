@@ -36,7 +36,7 @@ def main():
     # Center the title
     st.markdown('<h2 class="center-text">TEXT EXTRACTION FROM IMAGES</h2>', unsafe_allow_html=True)
     
-    # Add custom CSS
+    # Add custom CSS and the provided script
     st.markdown("""
         <style>
     .center-text {
@@ -68,6 +68,7 @@ def main():
         height: 15%;
     }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6773875552199904" crossorigin="anonymous"></script>
     """, unsafe_allow_html=True)
     
     img2doc = Img2Doc()
