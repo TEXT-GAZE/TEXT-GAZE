@@ -8,7 +8,7 @@ def home():
 
 @app.route('/streamlit')
 def streamlit_app():
-    return redirect('https://textgaze-app-comparison.streamlit.app/')
+    return redirect('https://textgaze-appcomparison.streamlit.app/')
 
 @app.route('/streamlit1')
 def streamlit1_app():
