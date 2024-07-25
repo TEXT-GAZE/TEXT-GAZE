@@ -8,11 +8,11 @@ def home():
 
 @app.route('/streamlit')
 def streamlit_app():
-    return redirect('https://textgaze-appcomparison.streamlit.app/')
+    return redirect('https://documents-compare.onrender.com/')
 
 @app.route('/streamlit1')
 def streamlit1_app():
-    return redirect('https://textgaze-app-extraction.streamlit.app/')
+    return redirect('https://extraction-l54k.onrender.com/')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
