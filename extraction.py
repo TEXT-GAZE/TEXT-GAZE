@@ -4,14 +4,13 @@ import pytesseract
 from docx import Document
 import io
 import os
+import platform
 
-
-
-# Specify the path to tesseract executable for Windows
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-
-
-
+# Set the path to tesseract executable based on the operating system
+if platform.system() == "Windows":
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+else:
+    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 
 class Img2Doc:
     def __init__(self, font='Times New Roman', font_size=22, language='english'):
@@ -25,7 +24,6 @@ class Img2Doc:
             return text
         except Exception as e:
             return str(e)
-        
 
 def main():
     st.set_page_config(page_title="EXTRACT TEXT", page_icon="📄", layout="wide")
@@ -38,11 +36,9 @@ def main():
     """,
     unsafe_allow_html=True
     )
-    
-    # Center the title
+
     st.markdown('<h2 class="center-text">TEXT EXTRACTION FROM IMAGES</h2>', unsafe_allow_html=True)
-    
-    # Add custom CSS and the provided script
+
     st.markdown("""
         <style>
     .center-text {
@@ -76,10 +72,9 @@ def main():
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6773875552199904" crossorigin="anonymous"></script>
     """, unsafe_allow_html=True)
-    
+
     img2doc = Img2Doc()
 
-    # Initialize session state to store the extracted text and save state
     if "extracted_text" not in st.session_state:
         st.session_state.extracted_text = ""
     if "save_clicked" not in st.session_state:
@@ -87,7 +82,6 @@ def main():
     if "buffer" not in st.session_state:
         st.session_state.buffer = None
 
-    # File uploader for image and buttons side by side
     col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
     with col1:
         uploaded_image = st.file_uploader("OPEN IMAGE", type=["png", "jpg", "bmp"])
@@ -102,7 +96,7 @@ def main():
         if st.session_state.save_clicked and st.session_state.buffer:
             st.download_button("DOWNLOAD FILE (.docx)", data=st.session_state.buffer, file_name="text_document.docx", mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document", key="download_button")
 
-    col1, col2 = st.columns([1, 2])  # Adjust column width ratios as needed
+    col1, col2 = st.columns([1, 2])
 
     with col1:
         if uploaded_image:
@@ -117,7 +111,6 @@ def main():
 
         st.text_area("EXTRACTED TEXT", value=st.session_state.get('extracted_text', ''), height=550, key='text_area', help="The text extracted from the uploaded image.")
 
-
     if uploaded_image and save_button:
         doc = Document()
         doc.add_paragraph(st.session_state.extracted_text)
@@ -127,6 +120,6 @@ def main():
             st.session_state.buffer = buffer.getvalue()
             st.session_state.save_clicked = True
         st.experimental_rerun()
-            
+
 if __name__ == "__main__":
     main()
