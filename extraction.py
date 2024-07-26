@@ -3,9 +3,11 @@ from PIL import Image
 import pytesseract
 from docx import Document
 import io
+import os
 
 # Specify the path to tesseract executable if not in the system's PATH
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  # Update this path according to your installation
+tesseract_cmd = os.getenv('TESSERACT_CMD', r'C:\Program Files\Tesseract-OCR\tesseract.exe')
+pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
 
 class Img2Doc:
     def __init__(self, font='Times New Roman', font_size=22, language='english'):
