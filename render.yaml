@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: extraction
+    name: text-extraction-app
     env: python
     buildCommand: |
       apt-get update && apt-get install -y tesseract-ocr
