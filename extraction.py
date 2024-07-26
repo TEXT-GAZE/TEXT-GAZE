@@ -132,22 +132,6 @@ def main():
             st.session_state.buffer = buffer.getvalue()
             st.session_state.save_clicked = True
         st.experimental_rerun()
-
-    # Centered "Back To Home" button at the bottom
-    st.write("")  # Add some space between text area and buttons
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        if st.button("BACK TO HOME"):
-            st.session_state.extracted_text = ""
-            st.session_state.save_clicked = False
-            st.session_state.buffer = None
-            # JavaScript to redirect to the Flask index.html
-            st.markdown("""
-            <script>
-            window.location.href = "/";
-            </script>
-            """, unsafe_allow_html=True)
             
-
 if __name__ == "__main__":
     main()
