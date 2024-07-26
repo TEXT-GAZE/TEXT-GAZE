@@ -395,8 +395,8 @@ with col2:
         st.session_state['compare_clicked'] = True
     if st.button("SAVE(.docx)", key="docx_button", help="Save file as word format"):
         st.session_state['save_docx_button'] = True
-    if st.button("SAVE(.pdf)", key="pdf_button", help="Save file as PDF format"):
-        st.session_state['save_pdf_button'] = True
+    # if st.button("SAVE(.pdf)", key="pdf_button", help="Save file as PDF format"):
+        # st.session_state['save_pdf_button'] = True
 
         
 
