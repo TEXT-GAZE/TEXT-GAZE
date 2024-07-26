@@ -29,9 +29,6 @@ def main():
     st.markdown(
     """
     <div class="header">
-        <div class="logo">
-            <div class="logo-img"><img src="../static/TEXT_GAZE_LOGO.png" width="110px" height="120px"></div>
-        </div>
         <div class="logo-text">TEXT - GAZE</div>
     </div>
     """,
@@ -41,7 +38,7 @@ def main():
     # Center the title
     st.markdown('<h2 class="center-text">TEXT EXTRACTION FROM IMAGES</h2>', unsafe_allow_html=True)
     
-    # Add custom CSS
+    # Add custom CSS and the provided script
     st.markdown("""
         <style>
     .center-text {
@@ -50,27 +47,17 @@ def main():
     }
     .header {
         width: 100%;
-        height: 15%; /* Adjusted height for header */
+        height: 17%; /* Adjusted height for header */
         background-color: #dd6969; /* Reddish color for header */
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
+        padding: 25px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         position: fixed; /* Fixed position */
         top: 0;
         left: 0;
         z-index: 1000;
-    }
-    .logo {
-        position: absolute;
-        left: 20px;
-        display: flex;
-        align-items: center;
-    }
-    .logo-img {
-        display: flex;
-        align-items: center;
     }
     .logo-text {
         font-size: 3.0rem; /* Increased font size */
@@ -80,8 +67,10 @@ def main():
         text-align: center;
         width: 100%;
         position: absolute;
+        height: 15%;
     }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6773875552199904" crossorigin="anonymous"></script>
     """, unsafe_allow_html=True)
     
     img2doc = Img2Doc()
