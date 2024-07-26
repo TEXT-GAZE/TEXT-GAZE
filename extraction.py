@@ -6,8 +6,14 @@ import io
 import os
 
 # Specify the path to tesseract executable if not in the system's PATH
-tesseract_cmd = os.getenv('TESSERACT_CMD', r'C:\Program Files\Tesseract-OCR\tesseract.exe')
+# tesseract_cmd = os.getenv('TESSERACT_CMD', r'C:\Program Files\Tesseract-OCR\tesseract.exe')
+# pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
+
+# Specify the path to Tesseract executable
+# Use environment variable if available, otherwise default to '/usr/bin/tesseract'
+tesseract_cmd = os.getenv('TESSERACT_CMD', '/usr/bin/tesseract')
 pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
+
 
 class Img2Doc:
     def __init__(self, font='Times New Roman', font_size=22, language='english'):
