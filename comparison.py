@@ -4,6 +4,12 @@ from docx import Document
 from docx2pdf import convert
 from difflib import Differ
 import io
+import platform  # Add this import
+
+# Conditionally import pythoncom and win32com.client if on Windows
+if platform.system() == "Windows":
+    import pythoncom
+    import win32com.client
 
 # Function to extract text from a PDF file
 def extract_text_from_pdf(file):
@@ -34,6 +40,13 @@ def extract_text_from_pdf(file):
 # Function to convert DOCX to PDF
 def convert_docx_to_pdf(docx_path):
     pdf_path = docx_path.replace('.docx', '.pdf')
+    pythoncom.CoInitialize()
+    try:
+        # Convert DOCX to PDF
+        convert(docx_path, pdf_path)
+    finally:
+        # Uninitialize COM
+        pythoncom.CoUninitialize()
     return pdf_path
 
 def convert_pdf_to_word(pdf_path, output_path):
@@ -56,7 +69,7 @@ def extract_text_from_docx(file):
 def load_document(file):
     if file.name.endswith('.pdf'):
         return extract_text_from_pdf(file)
-    elif file.name.endswith('.docx'):
+    #elif file.name.endswith('.docx'):
         # Save the uploaded docx file to a temporary file
         with open(file.name, 'wb') as f:
             f.write(file.getvalue())
@@ -344,7 +357,7 @@ col1, col2, col3 = st.columns([1, 0.2, 1])
 
 with col1:
     st.subheader("UPLOAD DOCUMENT 1")
-    uploaded_file1 = st.file_uploader("CHOOSE A FILE (.docx), (.pdf)", type=["pdf", "docx"], key="doc1", on_change=reset_session_state)
+    uploaded_file1 = st.file_uploader("CHOOSE A FILE (.pdf)", type=["pdf"], key="doc1", on_change=reset_session_state)
 
     doc1_placeholder = st.empty()  # Placeholder for Document 1 content
     if uploaded_file1:
@@ -390,7 +403,7 @@ with col2:
 
 with col3:
     st.subheader("UPLOAD DOCUMENT 2")
-    uploaded_file2 = st.file_uploader("CHOOSE A FILE (.docx), (.pdf)", type=["pdf", "docx"], key="doc2", on_change=reset_session_state)
+    uploaded_file2 = st.file_uploader("CHOOSE A FILE (.pdf)", type=["pdf"], key="doc2", on_change=reset_session_state)
 
     doc2_placeholder = st.empty()  # Placeholder for Document 2 content
     if uploaded_file2:
@@ -441,7 +454,7 @@ if st.session_state.get('compare_clicked', False):
             st.subheader("DOCUMENT 2")
             st.markdown(f'<div class="editable-textarea">{doc2_html}</div>', unsafe_allow_html=True)
     else:
-        st.error("!!!!PLEASE UPLOAD BOTH FILE BEFORE COMPARING!!!!")
+        st.error("!!!!PLEASE UPLOAD BOTH FILES BEFORE COMPARING!!!!")
 
 
 # Function to get edited content from HTML (this requires JavaScript to be included in the HTML)
