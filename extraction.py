@@ -5,15 +5,11 @@ from docx import Document
 import io
 import os
 
-# Specify the path to tesseract executable if not in the system's PATH
-# tesseract_cmd = os.getenv('TESSERACT_CMD', r'C:\Program Files\Tesseract-OCR\tesseract.exe')
-# pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
-
-# Specify the path to Tesseract executable
-# Use environment variable if available, otherwise default to '/usr/bin/tesseract'
-tesseract_cmd = os.getenv('TESSERACT_CMD', '/usr/bin/tesseract')
-pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
-
+# Detect the operating system and set the path to tesseract executable accordingly
+if os.name == 'nt':  # for Windows
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+else:  # for Unix/Linux
+    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 
 class Img2Doc:
     def __init__(self, font='Times New Roman', font_size=22, language='english'):
@@ -27,7 +23,6 @@ class Img2Doc:
             return text
         except Exception as e:
             return str(e)
-        
 
 def main():
     st.set_page_config(page_title="EXTRACT TEXT", page_icon="📄", layout="wide")
@@ -118,7 +113,6 @@ def main():
                 st.session_state.extracted_text = text
 
         st.text_area("EXTRACTED TEXT", value=st.session_state.get('extracted_text', ''), height=550, key='text_area', help="The text extracted from the uploaded image.")
-
 
     if uploaded_image and save_button:
         doc = Document()
