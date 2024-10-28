@@ -13,7 +13,8 @@ services:
     env: python
     buildCommand: |
       apt-get update && apt-get install -y tesseract-ocr libtesseract-dev
-      echo "export TESSERACT_CMD=/usr/bin/tesseract" >> ~/.bashrc
+      which tesseract  # This will output the path to tesseract
+      echo "export TESSERACT_CMD=$(which tesseract)" >> ~/.bashrc
       source ~/.bashrc
       pip install -r requirements.txt
     startCommand: streamlit run extraction.py --server.port $PORT --server.address 0.0.0.0
