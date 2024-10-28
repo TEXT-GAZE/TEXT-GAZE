@@ -11,6 +11,8 @@ import os
 tesseract_cmd = os.getenv('TESSERACT_CMD', '/usr/bin/tesseract')
 pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
 
+print(f"Tesseract command path: {tesseract_cmd}")
+
 
 # # Detect the operating system and set the path to tesseract executable accordingly
 # if os.name == 'nt':  # for Windows
