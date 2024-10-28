@@ -12,5 +12,5 @@ services:
     name: text-extraction-app
     env: python
     buildCommand: |
-      apt-get update && apt-get install -y tesseract-ocr && pip install -r requirements.txt
+      apt-get update && apt-get install -y tesseract-ocr libtesseract-dev && ls /usr/bin/ && pip install -r requirements.txt
     startCommand: streamlit run extraction.py --server.port $PORT --server.address 0.0.0.0
